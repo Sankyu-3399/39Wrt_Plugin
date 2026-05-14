@@ -1,0 +1,528 @@
+<%+header%>
+
+<style>
+.smartcase-page {
+	max-width: 1180px;
+	margin: 0 auto;
+	color: #1f2937;
+}
+
+.smartcase-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 18px;
+	margin: 4px 0 18px;
+}
+
+.smartcase-title {
+	margin: 0;
+	font-size: 24px;
+	font-weight: 650;
+	line-height: 1.25;
+}
+
+.smartcase-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 32px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	border: 1px solid #d8dee8;
+	background: #f8fafc;
+	color: #526072;
+	font-weight: 650;
+	white-space: nowrap;
+}
+
+.smartcase-status::before {
+	content: "";
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: #8a97a8;
+	box-shadow: 0 0 0 4px rgba(138, 151, 168, 0.14);
+}
+
+.smartcase-status.connected {
+	border-color: #a9d6c1;
+	background: #f0faf5;
+	color: #17623b;
+}
+
+.smartcase-status.connected::before {
+	background: #21a365;
+	box-shadow: 0 0 0 4px rgba(33, 163, 101, 0.14);
+}
+
+.smartcase-status.disconnected {
+	border-color: #efb8bd;
+	background: #fff5f6;
+	color: #9b1c2b;
+}
+
+.smartcase-status.disconnected::before {
+	background: #d43f4d;
+	box-shadow: 0 0 0 4px rgba(212, 63, 77, 0.14);
+}
+
+.smartcase-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+	gap: 16px;
+	align-items: start;
+}
+
+.smartcase-panel {
+	border: 1px solid #dce3ec;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+	overflow: hidden;
+}
+
+.smartcase-panel-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 16px 18px;
+	border-bottom: 1px solid #edf1f6;
+}
+
+.smartcase-panel-title h3 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 650;
+}
+
+.smartcase-body {
+	padding: 18px;
+}
+
+.smartcase-mode-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.smartcase-mode {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	min-height: 116px;
+	padding: 14px;
+	border: 1px solid #dce3ec;
+	border-radius: 8px;
+	background: #fbfcfe;
+	color: #1f2937;
+	text-align: left;
+	cursor: pointer;
+	transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.smartcase-mode:hover {
+	border-color: #8bb7e8;
+	background: #f7fbff;
+	box-shadow: 0 6px 16px rgba(30, 102, 189, 0.08);
+}
+
+.smartcase-mode.selected {
+	border-color: #1677d2;
+	background: #f3f9ff;
+	box-shadow: inset 0 0 0 1px #1677d2;
+}
+
+.smartcase-mode-name {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.smartcase-mode-tag {
+	margin-top: 24px;
+	padding: 4px 8px;
+	border-radius: 999px;
+	background: #eef3f8;
+	color: #5a687a;
+	font-size: 12px;
+	font-weight: 650;
+}
+
+.smartcase-mode.selected .smartcase-mode-tag {
+	background: #dceeff;
+	color: #155fa7;
+}
+
+.smartcase-summary {
+	display: grid;
+	gap: 12px;
+}
+
+.smartcase-summary-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #edf1f6;
+}
+
+.smartcase-summary-row:last-child {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.smartcase-summary-label {
+	color: #667386;
+	font-size: 13px;
+}
+
+.smartcase-summary-value {
+	color: #1f2937;
+	font-weight: 650;
+	text-align: right;
+	word-break: break-word;
+}
+
+.smartcase-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 18px;
+}
+
+.smartcase-apply {
+	width: 100%;
+	min-height: 38px;
+	border-radius: 6px;
+	font-weight: 650;
+}
+
+.smartcase-message {
+	min-height: 40px;
+	padding: 11px 12px;
+	border: 1px solid #dce3ec;
+	border-radius: 8px;
+	background: #f8fafc;
+	color: #526072;
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+.smartcase-message.success {
+	border-color: #a9d6c1;
+	background: #f0faf5;
+	color: #17623b;
+}
+
+.smartcase-message.error {
+	border-color: #efb8bd;
+	background: #fff5f6;
+	color: #9b1c2b;
+}
+
+.smartcase-shell {
+	margin-top: 16px;
+	display: none;
+}
+
+.smartcase-shell.visible {
+	display: block;
+}
+
+.smartcase-shell-form {
+	display: flex;
+	gap: 10px;
+}
+
+.smartcase-shell-input {
+	flex: 1;
+	min-width: 0;
+	font-family: monospace;
+}
+
+.smartcase-shell-output {
+	margin-top: 12px;
+	min-height: 220px;
+	max-height: 420px;
+	overflow: auto;
+	padding: 12px;
+	border: 1px solid #dce3ec;
+	border-radius: 8px;
+	background: #0f172a;
+	color: #e5e7eb;
+	font-family: monospace;
+	font-size: 12px;
+	line-height: 1.55;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+#smartcase-mode {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+@media (max-width: 960px) {
+	.smartcase-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.smartcase-header {
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 680px) {
+	.smartcase-page {
+		margin: 0;
+	}
+
+	.smartcase-mode-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.smartcase-shell-form {
+		flex-direction: column;
+	}
+
+	.smartcase-panel-title,
+	.smartcase-body {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.smartcase-status {
+		white-space: normal;
+	}
+}
+</style>
+
+<div class="smartcase-page">
+	<div class="smartcase-header">
+		<h2 name="content" class="smartcase-title"><%:5G Smart Case Network Mode Switch%></h2>
+		<span id="smartcase-adb-status" class="smartcase-status disconnected"><%:5G Smart Case ADB not connected%></span>
+	</div>
+
+	<div class="smartcase-grid">
+		<div class="smartcase-panel">
+			<div class="smartcase-panel-title">
+				<h3><%:Permanent network mode%></h3>
+			</div>
+
+			<div class="smartcase-body">
+				<select id="smartcase-mode" class="cbi-input-select" aria-label="<%:Permanent network mode%>">
+					<option value="1">CDC-NCM</option>
+					<option value="2">CDC-ECM</option>
+					<option value="3">RNDIS</option>
+				</select>
+
+				<div class="smartcase-mode-grid">
+					<button type="button" class="smartcase-mode selected" data-mode="1" aria-pressed="true">
+						<span class="smartcase-mode-name">CDC-NCM</span>
+						<span class="smartcase-mode-tag"><%:Mode%> 1</span>
+					</button>
+					<button type="button" class="smartcase-mode" data-mode="2" aria-pressed="false">
+						<span class="smartcase-mode-name">CDC-ECM</span>
+						<span class="smartcase-mode-tag"><%:Mode%> 2</span>
+					</button>
+					<button type="button" class="smartcase-mode" data-mode="3" aria-pressed="false">
+						<span class="smartcase-mode-name">RNDIS</span>
+						<span class="smartcase-mode-tag"><%:Mode%> 3</span>
+					</button>
+				</div>
+
+				<div class="smartcase-actions">
+					<input type="button" class="btn cbi-button cbi-button-apply smartcase-apply" id="smartcase-apply" value="<%:Switch and reboot%>" />
+					<div id="smartcase-message" class="smartcase-message"><%:Ready%></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="smartcase-panel">
+			<div class="smartcase-panel-title">
+				<h3><%:ADB connection status%></h3>
+			</div>
+
+			<div class="smartcase-body">
+				<div class="smartcase-summary">
+					<div class="smartcase-summary-row">
+						<span class="smartcase-summary-label"><%:Status%></span>
+						<span id="smartcase-status-text" class="smartcase-summary-value"><%:Offline%></span>
+					</div>
+					<div class="smartcase-summary-row">
+						<span class="smartcase-summary-label"><%:Device%></span>
+						<span id="smartcase-device" class="smartcase-summary-value">-</span>
+					</div>
+					<div class="smartcase-summary-row">
+						<span class="smartcase-summary-label"><%:Current mode%></span>
+						<span id="smartcase-current-mode" class="smartcase-summary-value">-</span>
+					</div>
+					<div class="smartcase-summary-row">
+						<span class="smartcase-summary-label"><%:Selected mode%></span>
+						<span id="smartcase-selected-mode" class="smartcase-summary-value">CDC-NCM</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="smartcase-shell-panel" class="smartcase-panel smartcase-shell">
+			<div class="smartcase-panel-title">
+				<h3><%:ADB Shell%></h3>
+			</div>
+
+			<div class="smartcase-body">
+				<div class="smartcase-shell-form">
+					<input type="text" id="smartcase-shell-command" class="cbi-input-text smartcase-shell-input" placeholder="cat /mnt/data/mode.cfg" />
+					<input type="button" id="smartcase-shell-run" class="btn cbi-button cbi-button-apply" value="<%:Execute%>" />
+				</div>
+				<pre id="smartcase-shell-output" class="smartcase-shell-output">$ adb shell</pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">//<![CDATA[
+var smartcaseConnected = false;
+
+function smartcaseText(id, text) {
+	var el = document.getElementById(id);
+	if (el)
+		el.textContent = text || '';
+}
+
+function setStatus(data) {
+	var el = document.getElementById('smartcase-adb-status');
+	var shellPanel = document.getElementById('smartcase-shell-panel');
+
+	if (!el || !data)
+		return;
+
+	smartcaseConnected = !!data.connected;
+
+	var message = data.message || (smartcaseConnected ? '<%:5G Smart Case ADB connected%>' : '<%:5G Smart Case ADB not connected%>');
+
+	el.textContent = message;
+	el.className = 'smartcase-status ' + (smartcaseConnected ? 'connected' : 'disconnected');
+
+	smartcaseText('smartcase-status-text', smartcaseConnected ? '<%:Online%>' : '<%:Offline%>');
+	smartcaseText('smartcase-device', smartcaseConnected ? (data.device || '-') : '-');
+	smartcaseText('smartcase-current-mode', smartcaseConnected ? (data.current_mode || '-') : '-');
+
+	if (shellPanel)
+		shellPanel.className = 'smartcase-panel smartcase-shell' + (smartcaseConnected ? ' visible' : '');
+}
+
+function setMessage(text, ok) {
+	var el = document.getElementById('smartcase-message');
+	if (!el)
+		return;
+
+	el.className = 'smartcase-message ' + (text ? (ok ? 'success' : 'error') : '');
+	el.textContent = text || '<%:Ready%>';
+}
+
+function setMode(mode) {
+	var select = document.getElementById('smartcase-mode');
+	var labels = { '1': 'CDC-NCM', '2': 'CDC-ECM', '3': 'RNDIS' };
+	var buttons = document.querySelectorAll('.smartcase-mode');
+
+	if (!labels[mode])
+		return;
+
+	select.value = mode;
+	smartcaseText('smartcase-selected-mode', labels[mode]);
+
+	for (var i = 0; i < buttons.length; i++) {
+		var selected = buttons[i].getAttribute('data-mode') === mode;
+		buttons[i].className = 'smartcase-mode' + (selected ? ' selected' : '');
+		buttons[i].setAttribute('aria-pressed', selected ? 'true' : 'false');
+	}
+}
+
+function refreshStatus() {
+	XHR.get('<%=url([[admin]], [[network]], [[smartcase_modswitch]], [[status]])%>', null, function(x, data) {
+		setStatus(data);
+	});
+}
+
+var modeButtons = document.querySelectorAll('.smartcase-mode');
+for (var i = 0; i < modeButtons.length; i++) {
+	modeButtons[i].onclick = function() {
+		setMode(this.getAttribute('data-mode'));
+	};
+}
+
+document.getElementById('smartcase-apply').onclick = function() {
+	var button = this;
+	var mode = document.getElementById('smartcase-mode').value;
+
+	button.disabled = true;
+	setMessage('<%:Applying permanent mode switch...%>', true);
+
+	XHR.post('<%=url([[admin]], [[network]], [[smartcase_modswitch]], [[switch]])%>', { mode: mode }, function(x, data) {
+		button.disabled = false;
+
+		if (data) {
+			setStatus(data);
+			setMessage(data.message, data.success);
+			refreshStatus();
+		} else {
+			setMessage('<%:Operation failed: no response received%>', false);
+		}
+	});
+};
+
+document.getElementById('smartcase-shell-run').onclick = function() {
+	var button = this;
+	var input = document.getElementById('smartcase-shell-command');
+	var output = document.getElementById('smartcase-shell-output');
+	var command = input ? input.value : '';
+
+	if (!smartcaseConnected) {
+		output.textContent = '<%:5G Smart Case ADB not connected%>';
+		return;
+	}
+
+	if (!command) {
+		output.textContent = '<%:Command is empty%>';
+		return;
+	}
+
+	button.disabled = true;
+	output.textContent = '$ ' + command + '\n';
+
+	XHR.post('<%=url([[admin]], [[network]], [[smartcase_modswitch]], [[shell_exec]])%>', { command: command }, function(x, data) {
+		button.disabled = false;
+
+		if (data) {
+			output.textContent = '$ ' + command + '\n' + (data.output || data.message || '');
+			setStatus(data);
+		} else {
+			output.textContent = '$ ' + command + '\n<%:Operation failed: no response received%>';
+		}
+	});
+};
+
+document.getElementById('smartcase-shell-command').onkeydown = function(ev) {
+	ev = ev || window.event;
+	if (ev.key === 'Enter' || ev.keyCode === 13) {
+		document.getElementById('smartcase-shell-run').click();
+		return false;
+	}
+};
+
+setMode(document.getElementById('smartcase-mode').value || '1');
+refreshStatus();
+
+XHR.poll(3, '<%=url([[admin]], [[network]], [[smartcase_modswitch]], [[status]])%>', null, function(x, data) {
+	setStatus(data);
+});
+//]]></script>
+
+<%+footer%>

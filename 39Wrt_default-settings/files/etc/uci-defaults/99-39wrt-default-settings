@@ -1,0 +1,48 @@
+#!/bin/sh
+
+jdcloud_cpe_selected=0
+[ -e /etc/uci-defaults/99-jdcloud-ax1800pro-cpe-network ] && jdcloud_cpe_selected=1
+[ -e /etc/board.d/99_jdcloud_ax1800pro_cpe ] && jdcloud_cpe_selected=1
+
+uci -q batch <<-EOT
+	set dhcp.lan.start='10'
+	set dhcp.lan.limit='200'
+	set dhcp.lan.dhcpv6='disabled'
+	set dhcp.@dnsmasq[0].sequential_ip='1'
+	set upnpd.config.enabled='1'
+	set ttyd.@ttyd[0].command='/bin/login -f root'
+	commit dhcp
+	commit upnpd
+	commit ttyd
+EOT
+
+if [ "$jdcloud_cpe_selected" = "1" ]; then
+	uci -q batch <<-EOT
+		set dhcp.lan.ra='relay'
+		set dhcp.lan.dhcpv6='relay'
+		set dhcp.lan.ndp='relay'
+		commit dhcp
+	EOT
+fi
+
+[ -x /etc/init.d/miniupnpd ] && /etc/init.d/miniupnpd enable
+
+status_index="/www/luci-static/resources/view/status/index.js"
+rom_status_index="/rom${status_index}"
+patch_file="/usr/share/39wrt-default-settings/status-index-bandwidth.patch.sed"
+
+if [ -f "$patch_file" ] && ! grep -q "view.status.include.31_bandwidth" "$status_index" 2>/dev/null; then
+	source_index="$status_index"
+	[ -f "$source_index" ] || source_index="$rom_status_index"
+
+	if [ -f "$source_index" ]; then
+		tmp_index="/tmp/39wrt-status-index.$$"
+		mkdir -p "$(dirname "$status_index")"
+		sed -f "$patch_file" "$source_index" > "$tmp_index" && mv "$tmp_index" "$status_index"
+		rm -f "$tmp_index"
+	fi
+fi
+
+rm -f /tmp/luci-indexcache.*.json
+
+exit 0

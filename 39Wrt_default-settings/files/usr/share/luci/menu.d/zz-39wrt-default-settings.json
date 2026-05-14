@@ -1,0 +1,43 @@
+{
+	"admin/status/routes": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-status-routes": "executable" }
+		}
+	},
+
+	"admin/status/routesj": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-status-routes": "executable" }
+		}
+	},
+
+	"admin/status/iptables": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-status-firewall": "executable" }
+		}
+	},
+
+	"admin/status/nftables": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-status-firewall": "executable" }
+		}
+	},
+
+	"admin/status/channel_analysis": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-status-channel-analysis": "executable" }
+		}
+	},
+
+	"admin/network/diagnostics": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-network-diagnostics": "executable" }
+		}
+	},
+
+	"admin/status/realtime/bandwidth": {
+		"depends": {
+			"fs": { "/etc/39wrt-default-settings/show-realtime-bandwidth": "executable" }
+		}
+	}
+}

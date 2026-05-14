@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. /lib/functions/uci-defaults.sh
+. /lib/functions/system.sh
+
+[ "$(board_name 2>/dev/null)" = "jdcloud,ax1800-pro" ] || exit 0
+
+board_config_update
+ucidef_set_interfaces_lan_wan "eth0 eth1 eth2 eth3" "usb0"
+board_config_flush
+
+exit 0

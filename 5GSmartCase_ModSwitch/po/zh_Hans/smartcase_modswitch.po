@@ -1,0 +1,89 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "5G Smart Case Network Mode Switch"
+msgstr "5G智慧壳网络模式切换"
+
+msgid "ADB connection status"
+msgstr "ADB连接状态"
+
+msgid "5G Smart Case ADB connected"
+msgstr "5G智慧壳ADB已连接"
+
+msgid "5G Smart Case ADB not connected"
+msgstr "5G智慧壳ADB未连接"
+
+msgid "Permanent network mode"
+msgstr "永久网络模式"
+
+msgid "Mode"
+msgstr "模式"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Online"
+msgstr "在线"
+
+msgid "Offline"
+msgstr "离线"
+
+msgid "Device"
+msgstr "设备"
+
+msgid "Selected mode"
+msgstr "已选模式"
+
+msgid "Ready"
+msgstr "就绪"
+
+msgid "Switch and reboot"
+msgstr "切换并重启"
+
+msgid "Applying permanent mode switch..."
+msgstr "正在执行永久模式切换..."
+
+msgid "Operation failed: no response received"
+msgstr "执行失败：没有收到返回结果"
+
+msgid "Invalid network mode"
+msgstr "无效的网络模式"
+
+msgid "ADB sync failed"
+msgstr "ADB sync 执行失败"
+
+msgid "Failed to write permanent mode configuration"
+msgstr "写入永久模式配置失败"
+
+msgid "Post-write sync failed"
+msgstr "写入后 sync 执行失败"
+
+msgid "Configuration verification failed, current value:"
+msgstr "配置校验失败，当前读取值："
+
+msgid "empty"
+msgstr "空"
+
+msgid "Switched to"
+msgstr "已切换为"
+
+msgid "5G Smart Case is rebooting"
+msgstr "5G智慧壳正在重启"
+
+msgid "Current mode"
+msgstr "当前模式"
+
+msgid "ADB Shell"
+msgstr "ADB Shell"
+
+msgid "Command is empty"
+msgstr "命令为空"
+
+msgid "Command executed"
+msgstr "命令已执行"
+
+msgid "Execute"
+msgstr "执行"
+
+msgid "Unknown"
+msgstr "未知"
