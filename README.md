@@ -411,31 +411,31 @@ make -j$(nproc) V=s
 单独编译 39Wrt 默认设置包：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/39Wrt_default-settings/compile V=s
+make package/39Wrt_Plugin/39Wrt_default-settings/compile V=s
 ```
 
 单独编译 JDCloud CPE 配置包：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/JDCloud_AX1800Pro_CPE/compile V=s
+make package/39Wrt_Plugin/JDCloud_AX1800Pro_CPE/compile V=s
 ```
 
 单独编译 5G Smart Case 插件：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/5GSmartCase_ModSwitch/compile V=s
+make package/39Wrt_Plugin/5GSmartCase_ModSwitch/compile V=s
 ```
 
 单独编译 AdGuard Home 插件：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/luci-app-adguardhome/compile V=s
+make package/39Wrt_Plugin/luci-app-adguardhome/compile V=s
 ```
 
 单独编译 Aurora 主题修改版：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/luci-theme-aurora_mod/compile V=s
+make package/39Wrt_Plugin/luci-theme-aurora_mod/compile V=s
 ```
 
 ## 最小化 clean
@@ -443,17 +443,17 @@ make package/Sankyu/39Wrt_Plugin/luci-theme-aurora_mod/compile V=s
 清理单个插件：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/<插件目录名>/clean
+make package/39Wrt_Plugin/<插件目录名>/clean
 ```
 
 示例：
 
 ```sh
-make package/Sankyu/39Wrt_Plugin/39Wrt_default-settings/clean
-make package/Sankyu/39Wrt_Plugin/5GSmartCase_ModSwitch/clean
-make package/Sankyu/39Wrt_Plugin/JDCloud_AX1800Pro_CPE/clean
-make package/Sankyu/39Wrt_Plugin/luci-app-adguardhome/clean
-make package/Sankyu/39Wrt_Plugin/luci-theme-aurora_mod/clean
+make package/39Wrt_Plugin/39Wrt_default-settings/clean
+make package/39Wrt_Plugin/5GSmartCase_ModSwitch/clean
+make package/39Wrt_Plugin/JDCloud_AX1800Pro_CPE/clean
+make package/39Wrt_Plugin/luci-app-adguardhome/clean
+make package/39Wrt_Plugin/luci-theme-aurora_mod/clean
 ```
 
 重新生成 rootfs：
