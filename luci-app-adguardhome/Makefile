@@ -5,7 +5,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-adguardhome
+PKG_NAME:=AdGuardHome_Mod
 PKG_VERSION:=1.8
 PKG_RELEASE:=11
 
@@ -23,7 +23,7 @@ define Package/AdGuardHome_Mod
 	DEPENDS:=+!wget&&!curl:wget
 endef
 
-define Package/luci-app-adguardhome/description
+define Package/AdGuardHome_Mod/description
 	LuCI support for adguardhome
 endef
 
@@ -33,13 +33,13 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-adguardhome/conffiles
+define Package/AdGuardHome_Mod/conffiles
 /usr/share/AdGuardHome/links.txt
 /etc/config/AdGuardHome
 endef
 
-define Package/luci-app-adguardhome/install
-    $(INSTALL_DIR) $(1)/usr/lib/lua/luci
+define Package/AdGuardHome_Mod/install
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
 	$(INSTALL_DIR) $(1)/
 	cp -pR ./root/* $(1)/
@@ -47,11 +47,11 @@ define Package/luci-app-adguardhome/install
 	po2lmo ./po/zh-cn/AdGuardHome.po $(1)/usr/lib/lua/luci/i18n/AdGuardHome.zh-cn.lmo
 endef
 
-define Package/luci-app-adguardhome/postinst
+define Package/AdGuardHome_Mod/postinst
 #!/bin/sh
 	/etc/init.d/AdGuardHome enable >/dev/null 2>&1
-	enable=$(uci get AdGuardHome.AdGuardHome.enabled 2>/dev/null)
-	if [ "$enable" == "1" ]; then
+	enable=$$(uci get AdGuardHome.AdGuardHome.enabled 2>/dev/null)
+	if [ "$$$$enable" = "1" ]; then
 		/etc/init.d/AdGuardHome reload
 	fi
 	rm -f /tmp/luci-indexcache
@@ -59,11 +59,11 @@ define Package/luci-app-adguardhome/postinst
 exit 0
 endef
 
-define Package/luci-app-adguardhome/prerm
+define Package/AdGuardHome_Mod/prerm
 #!/bin/sh
-if [ -z "$${IPKG_INSTROOT}" ]; then
-     /etc/init.d/AdGuardHome disable
-     /etc/init.d/AdGuardHome stop
+if [ -z "$$$${IPKG_INSTROOT}" ]; then
+	/etc/init.d/AdGuardHome disable
+	/etc/init.d/AdGuardHome stop
 uci -q batch <<-EOF >/dev/null 2>&1
 	delete ucitrack.@AdGuardHome[-1]
 	commit ucitrack
@@ -72,4 +72,4 @@ fi
 exit 0
 endef
 
-$(eval $(call BuildPackage,luci-app-adguardhome))
+$(eval $(call BuildPackage,AdGuardHome_Mod))
