@@ -13,10 +13,10 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-adguardhome(Mod)
-	SECTION:=luci
+define Package/luci-app-adguardhome
+	SECTION:=39wrt
 	CATEGORY:=39Wrt_Plugin
-	TITLE:=Adguardhome(Luci Mod)
+	TITLE:=AdGuardHome
 	PKG_MAINTAINER:=<https://github.com/rufengsuixing/luci-app-adguardhome>
 	PKGARCH:=all
 	DEPENDS:=+!wget&&!curl:wget
