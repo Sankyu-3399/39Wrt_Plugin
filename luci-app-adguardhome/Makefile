@@ -16,7 +16,8 @@ include $(INCLUDE_DIR)/package.mk
 define Package/luci-app-adguardhome
 	SECTION:=39wrt
 	CATEGORY:=39Wrt_Plugin
-	TITLE:=AdGuardHome
+	TITLE:=AdGuardHome (Mod)
+	MENU:=1
 	PKG_MAINTAINER:=<https://github.com/rufengsuixing/luci-app-adguardhome>
 	PKGARCH:=all
 	DEPENDS:=+!wget&&!curl:wget
