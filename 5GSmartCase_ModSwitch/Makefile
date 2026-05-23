@@ -12,7 +12,7 @@ define Package/luci-app-5gsmartcase-modswitch
   SECTION:=luci
   CATEGORY:=39Wrt_Plugin
   TITLE:=LuCI support for 5G Smart Case USB mode switch
-  DEPENDS:=+adb +luci +luci-base +luci-compat
+  DEPENDS:=+adb
   PKGARCH:=all
 endef
 
