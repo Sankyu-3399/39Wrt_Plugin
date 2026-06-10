@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -x /usr/libexec/39wrt-luci-custom/apply ] || exit 0
+/usr/libexec/39wrt-luci-custom/apply apply
+exit $?
